@@ -10,4 +10,6 @@ java {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(libs.kotlinx.coroutines.core) // Para Flow
+
 }

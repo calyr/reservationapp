@@ -19,6 +19,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.net.URLDecoder
 import java.net.URLEncoder
+import com.ucb.ucbtest.dollar.DollarUI
 
 @Composable
 fun AppNavigation() {
@@ -26,13 +27,18 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route,
+        startDestination = Screen.DollarScreen.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
         popExitTransition = { ExitTransition.None }
 
     ) {
+
+        composable(Screen.DollarScreen.route) {
+            DollarUI()
+        }
+
         composable(Screen.MenuScreen.route) {
             LoginUI(
                 onSuccess = {
