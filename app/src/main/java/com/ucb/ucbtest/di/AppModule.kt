@@ -5,7 +5,9 @@ import com.ucb.data.GithubRepository
 import com.ucb.data.LoginRepository
 import com.ucb.data.MovieRepository
 import com.ucb.data.PushNotificationRepository
+import com.ucb.data.RealDatabaseRepository
 import com.ucb.data.datastore.ILoginDataStore
+import com.ucb.data.dollar.IRealDatabaseDataSource
 import com.ucb.data.git.IGitRemoteDataSource
 import com.ucb.data.git.ILocalDataSource
 import com.ucb.data.movie.IMovieRemoteDataSource
@@ -26,7 +28,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import com.ucb.framework.datastore.LoginDataSource
+import com.ucb.framework.dollar.FirebaseRealDatabase
 import com.ucb.framework.push.FirebaseNotificationDataSource
+import com.ucb.usecases.DoDollarUpdate
 import com.ucb.usecases.GetEmailKey
 import com.ucb.usecases.ObtainToken
 
@@ -130,5 +134,23 @@ object AppModule {
     @Singleton
     fun provideIPushDataSource(): IPushDataSource {
         return FirebaseNotificationDataSource()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUseCaseDollarUpdate( repository:RealDatabaseRepository): DoDollarUpdate {
+        return DoDollarUpdate(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRealDatabaseRepository(dataSource: IRealDatabaseDataSource): RealDatabaseRepository {
+        return RealDatabaseRepository(dataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRealDatabaseDataSource(): IRealDatabaseDataSource {
+        return FirebaseRealDatabase()
     }
 }

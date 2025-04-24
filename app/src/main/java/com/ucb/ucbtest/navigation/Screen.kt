@@ -8,4 +8,5 @@ sealed class Screen(val route: String) {
     object MoviesScreen: Screen("movies")
     object MovieDetailScreen: Screen("movieDetail")
     object CounterScreen: Screen("counter")
+    object DollarScreen: Screen("dollar")
 }
